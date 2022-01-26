@@ -22,7 +22,7 @@ class PessoaController {
     static async pegaUmaPessoa(req, res) {
         const { id } = req.params
         try{
-            const umaPessoa = await database.Pessoas.findOne({
+            const umaPessoa = await database.Pessoas.scope('todos').findOne({
                 where: {
                     id: Number(id)
                 }
@@ -46,12 +46,12 @@ class PessoaController {
         const { id } = req.params
         const novasInfos = req.body
         try {
-            await database.Pessoas.update(novasInfos, {
+            await database.Pessoas.scope('todos').update(novasInfos, {
                 where: {
                     id: Number(id)
                 }
             })
-            const pessoaAtualizada = await database.Pessoas.findOne({
+            const pessoaAtualizada = await database.Pessoas.scope('todos').findOne({
                 where: {
                     id: Number(id)
                 }
