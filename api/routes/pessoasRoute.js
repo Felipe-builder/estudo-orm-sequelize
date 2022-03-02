@@ -10,6 +10,7 @@ router.post('/pessoas', PessoaController.criaPessoa)
 router.put('/pessoas/:id', PessoaController.atualizaPessoa)
 router.delete('/pessoas/:id', PessoaController.apagaPessoa)
 router.post('/pessoas/:id/restaura', PessoaController.restauraPessoa)
+
 router.get('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.pegaUmaMatricula)
 router.post('/pessoas/:estudanteId/matriculas', PessoaController.criaMatricula)
 router.put('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.atualizaMatricula)

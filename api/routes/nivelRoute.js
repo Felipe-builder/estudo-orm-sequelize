@@ -3,11 +3,12 @@ const NivelController = require('../controllers/NivelController')
 
 const router = Router()
 
-router.get('/niveis', NivelController.pegaTodosOsNiveis)
-router.get('/niveis/:id', NivelController.pegaUmNivel)
-router.post('/niveis', NivelController.criaNivel)
-router.put('/niveis/:id', NivelController.atualizaNivel)
-router.delete('/niveis/:id', NivelController.apagaNivel)
-router.post('/niveis/:id/restaura', NivelController.restauraNivel)
+router
+    .get('/niveis', NivelController.pegaTodosOsNiveis)
+    .get('/niveis/:id', NivelController.pegaUmNivel)
+    .post('/niveis', NivelController.criaNivel)
+    .put('/niveis/:id', NivelController.atualizaNivel)
+    .delete('/niveis/:id', NivelController.apagaNivel)
+    .post('/niveis/:id/restaura', NivelController.restauraNivel)
 
 module.exports = router
