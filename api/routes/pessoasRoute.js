@@ -3,19 +3,20 @@ const PessoaController = require('../controllers/PessoaController')
 
 const router = Router()
 
-router.get('/pessoas', PessoaController.pegaPessoasAtivas)
-router.get('/pessoas/todos', PessoaController.pegaTodasAsPessoas)
-router.get('/pessoas/:id', PessoaController.pegaUmaPessoa)
-router.post('/pessoas', PessoaController.criaPessoa)
-router.put('/pessoas/:id', PessoaController.atualizaPessoa)
-router.delete('/pessoas/:id', PessoaController.apagaPessoa)
-router.post('/pessoas/:id/restaura', PessoaController.restauraPessoa)
+router
+    .get('/pessoas', PessoaController.pegaPessoasAtivas)
+    .get('/pessoas/todos', PessoaController.pegaTodasAsPessoas)
+    .get('/pessoas/:id', PessoaController.pegaUmaPessoa)
+    .post('/pessoas', PessoaController.criaPessoa)
+    .put('/pessoas/:id', PessoaController.atualizaPessoa)
+    .delete('/pessoas/:id', PessoaController.apagaPessoa)
+    .post('/pessoas/:id/restaura', PessoaController.restauraPessoa)
 
-router.get('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.pegaUmaMatricula)
-router.post('/pessoas/:estudanteId/matriculas', PessoaController.criaMatricula)
-router.put('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.atualizaMatricula)
-router.delete('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.apagaMatricula)
-router.post('/pessoas/:estudanteId/matriculas/:matriculaId/restaura', PessoaController.restauraMatricula)
-router.get('/pessoas/:estudanteId/matriculas', PessoaController.pegaMatriculas)
+    .get('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.pegaUmaMatricula)
+    .post('/pessoas/:estudanteId/matriculas', PessoaController.criaMatricula)
+    .put('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.atualizaMatricula)
+    .delete('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.apagaMatricula)
+    .post('/pessoas/:estudanteId/matriculas/:matriculaId/restaura', PessoaController.restauraMatricula)
+    .get('/pessoas/:estudanteId/matriculas', PessoaController.pegaMatriculas)
 
 module.exports = router
