@@ -11,12 +11,13 @@ router
     .put('/pessoas/:id', PessoaController.atualizaPessoa)
     .delete('/pessoas/:id', PessoaController.apagaPessoa)
     .post('/pessoas/:id/restaura', PessoaController.restauraPessoa)
-
     .get('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.pegaUmaMatricula)
     .post('/pessoas/:estudanteId/matriculas', PessoaController.criaMatricula)
     .put('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.atualizaMatricula)
     .delete('/pessoas/:estudanteId/matriculas/:matriculaId', PessoaController.apagaMatricula)
     .post('/pessoas/:estudanteId/matriculas/:matriculaId/restaura', PessoaController.restauraMatricula)
     .get('/pessoas/:estudanteId/matriculas', PessoaController.pegaMatriculas)
+    .get('/pessoas/matriculas/:turmaId/confirmadas', PessoaController.pegaMatriculasPorTurma)
+
 
 module.exports = router
