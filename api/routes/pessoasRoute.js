@@ -18,6 +18,6 @@ router
     .post('/pessoas/:estudanteId/matriculas/:matriculaId/restaura', PessoaController.restauraMatricula)
     .get('/pessoas/:estudanteId/matriculas', PessoaController.pegaMatriculas)
     .get('/pessoas/matriculas/:turmaId/confirmadas', PessoaController.pegaMatriculasPorTurma)
-
+    .get('/pessoas/matriculas/lotadas', PessoaController.pegaTurmasLotadas)
 
 module.exports = router
