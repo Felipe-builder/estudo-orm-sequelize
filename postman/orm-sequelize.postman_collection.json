@@ -1,0 +1,695 @@
+{
+	"info": {
+		"_postman_id": "4afb6b31-aba5-4992-9d60-d929529eee08",
+		"name": "orm-sequelize",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pessoas",
+			"item": [
+				{
+					"name": "criaPessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Mario André\",\n    \"nomeUser\": \"Mario21\",\n    \"ativo\": true,\n    \"email\": \"mario@gmail.com\",\n    \"role\": \"estudante\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaPessoasAtivas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaTodasAsPessoas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/todos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaUmaPessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/4",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizaPessoa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeUser\": \"Giovan1\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/36",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"36"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "apagaPessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restauraPessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/1/restaura",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"1",
+								"restaura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancelaPessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/41/cancela",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"41",
+								"cancela"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Niveis",
+			"item": [
+				{
+					"name": "criaNivel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descr_nivel\": \"hardcore\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/niveis",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"niveis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaTodosOsNiveis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/niveis",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"niveis"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaUmNivel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/niveis/8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"niveis",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizaNivel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"descr_nivel\": \"insano\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/niveis/8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"niveis",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "apagaNivel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/niveis/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"niveis",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restauraNivel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/niveis/1/restaura",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"niveis",
+								"1",
+								"restaura"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turmas",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/turmas?data_inicial=2020-01-01&data_final=2020-01-31",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turmas"
+							],
+							"query": [
+								{
+									"key": "data_inicial",
+									"value": "2020-01-01"
+								},
+								{
+									"key": "data_final",
+									"value": "2020-01-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data_inicio\": \"2020-02-01\",\n    \"nivel_id\": 8,\n    \"docente_id\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/turmas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turmas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar uma turma por ID",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/turmas/1/restaura",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turmas",
+								"1",
+								"restaura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar uma turma por ID Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/turmas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turmas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"data_inicio\": \"2020-02-01\",\n    \"nivel_id\": 2,\n    \"docente_id\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/turmas/5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turmas",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/turmas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"turmas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Matriculas",
+			"item": [
+				{
+					"name": "criaMatricula",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"confirmado\",\n    \"turma_id\": 4\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/42/matriculas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"42",
+								"matriculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaUmaMatricula",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/1/matriculas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"1",
+								"matriculas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizaMatricula",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"confirmado\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/1/matriculas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"1",
+								"matriculas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletaMatricula",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/1/matriculas/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"1",
+								"matriculas",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restauraMatricula",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/1/matriculas/1/restaura",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"1",
+								"matriculas",
+								"1",
+								"restaura"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaMatriculasPorTurma",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/matriculas/1/confirmadas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"matriculas",
+								"1",
+								"confirmadas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaMatriculas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/41/matriculas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"41",
+								"matriculas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pegaTurmasLotadas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/matriculas/lotadas",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"matriculas",
+								"lotadas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000"
+		}
+	]
+}
