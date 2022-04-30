@@ -8,6 +8,26 @@ class Services {
     async pegaTodosOsRegistros() {
         return database[this.nomeDoModelo].findAll()
     }
+
+    async pegaUmRegistro(id) {
+        return database[this.nomeDoModelo].findOne({
+            where: {
+                id: Number(id)
+            }
+        })
+    }
+
+    async criaRegistro(dados) {
+
+    }
+
+    async atualizaRegistro(dadosAtualizados, id) {
+
+    }
+
+    async apagaRegistro(id) {
+
+    }
 }
 
 module.exports = Services

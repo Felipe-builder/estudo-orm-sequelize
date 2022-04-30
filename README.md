@@ -42,7 +42,7 @@
 >
 > ### Pessoas
 >   - GET '/pessoas'
->   - GET '/pessoas/todos'
+>   - GET '/pessoas/ativas'
 >   - GET '/pessoas/:id'
 >   - POST '/pessoas'
 >   - PUT '/pessoas/:id'
