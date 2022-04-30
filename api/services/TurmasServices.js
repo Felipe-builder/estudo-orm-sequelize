@@ -6,3 +6,5 @@ class TurmasServices extends Services {
     }
     // metodos
 }
+
+module.exports = TurmasServices
