@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         funcaoValidadora: function(dado) {
           if (dado.length < 3) throw new Error('o campo nome deve ter mais de 3 caracteres')
+        },
+        notEmpty: {
+          msg: 'O campo nome precisa ser preenchido'
+        },
+        notNull: {
+          msg: 'O campo nome precisa ser preenchido'
         }
       }
     },
@@ -35,10 +41,10 @@ module.exports = (sequelize, DataTypes) => {
           if (dado.length < 3 || dado.length > 20) throw new Error('O campo nomeUser deve ter mais de 3 caracteres')
         },
         notEmpty: {
-          msg: 'Porfavor digite sua senha'
+          msg: 'O campo nomeUser precisa ser preenchido'
         },
         notNull: {
-          msg: 'Porfavor digite sua senha'
+          msg: 'O campo nomeUser precisa ser preenchido'
         }
       }  
     },
@@ -60,16 +66,17 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         isEmail: {
           args: true,
           msg: 'dado do tipo e-mail inválido'
         },
         notEmpty: {
-          msg: 'Porfavor digite seu e-mail'
+          msg: 'O campo email precisa ser preenchido'
         },
         notNull: {
-          msg: 'Porfavor digite seu e-mail'
+          msg: 'O campo email precisa ser preenchido'
         }
       }
     },
