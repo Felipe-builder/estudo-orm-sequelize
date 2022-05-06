@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         funcaoValidadora: function(dado) {
-          if (dado.length <= 8 || dado.length >= 63) throw new Error('O campo sennha deve ter 8 ou mais caracteres')
+          if (dado.length <= 8 || dado.length >= 200) throw new Error('O campo sennha deve ter 8 ou mais caracteres')
         },
         notEmpty: {
           msg: "O campo senha precisa ser preenchido"
@@ -66,6 +66,11 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: "O campo senha precisa ser preenchido"
         }
+      },
+      set(valor) {
+        let senha = valor.toString()
+        const hash = bcrypt.hashSync(senha, 12)
+        this.setDataValue('senha', hash)
       }
     },
     email: {
@@ -102,7 +107,7 @@ module.exports = (sequelize, DataTypes) => {
       todos: {
         where: {}
       }
-    },
+    }
   });
   return Pessoas;
 };
