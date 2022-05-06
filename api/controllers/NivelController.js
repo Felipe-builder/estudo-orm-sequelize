@@ -16,7 +16,7 @@ class NivelController {
     static async pegaUmNivel(req, res) {
         const { id } = req.params
         try {
-            const umNivel = await niveisServices.pegaUmRegistro(Number(id))
+            const umNivel = await niveisServices.pegaUmRegistro({ id })
             return res.status(200).json(umNivel)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -38,7 +38,7 @@ class NivelController {
         const novasInfo = req.body
         try {
             await niveisServices.atualizaRegistro(novasInfo, Number(id))
-            const nivelAtualizado = await niveisServices.pegaUmRegistro(Number(id))
+            const nivelAtualizado = await niveisServices.pegaUmRegistro({id})
             return res.status(200).json(nivelAtualizado)
         } catch (error) {
             return res.status(500).json(error.message)
