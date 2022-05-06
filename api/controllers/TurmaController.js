@@ -21,7 +21,7 @@ class TurmaController {
     static async pegaUmaTurma(req, res) {
         const { id } = req.params
         try {
-            const umaTurma = await turmasServices.pegaUmRegistro(Number(id))
+            const umaTurma = await turmasServices.pegaUmRegistro({id})
             return res.status(200).json(umaTurma)
         } catch(error) {
             return res.status(500).json(error.message)
@@ -41,7 +41,7 @@ class TurmaController {
         const novasInfos = req.body
         try {
             await turmasServices.atualizaRegistro(novasInfos, Number(id))
-            const turmaAtualizada = await turmasServices.pegaUmRegistro(Number(id))
+            const turmaAtualizada = await turmasServices.pegaUmRegistro({id})
             return res.status(200).json(turmaAtualizada)
         } catch(error) {
             return res.status(500).json(error.message)

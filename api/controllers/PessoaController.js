@@ -23,7 +23,8 @@ class PessoaController {
     static async pegaUmaPessoa(req, res) {
         const { id } = req.params
         try{
-            const umaPessoa = await pessoasServices.pegaUmRegistro(Number(id))
+            console.log(id)
+            const umaPessoa = await pessoasServices.pegaUmRegistro({ id })
             return res.status(200).json(umaPessoa)
         } catch (error) {
             return res.status(404).json(error.message)
@@ -44,7 +45,7 @@ class PessoaController {
         const novasInfos = req.body
         try {
             await pessoasServices.atualizaRegistro(novasInfos, Number(id))
-            const pessoaAtualizada = await pessoasServices.pegaUmRegistro(Number(id))
+            const pessoaAtualizada = await pessoasServices.pegaUmRegistro({ id })
             return res.status(200).json(pessoaAtualizada)
         } catch (error) {
             return res.status(500).json(error.message)

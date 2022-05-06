@@ -34,7 +34,10 @@ module.exports = (sequelize, DataTypes) => {
     ativo: DataTypes.BOOLEAN,
     nomeUser: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: {
+        name: 'nomeUser',
+        msg: 'Este usuário já está em uso'
+      },
       allowNull: false,
       validate: {
         funcaoValidadora: function(dado) {
@@ -66,7 +69,10 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        name: 'email',
+        msg: 'Este email já está em uso'
+      },
       validate: {
         isEmail: {
           args: true,
