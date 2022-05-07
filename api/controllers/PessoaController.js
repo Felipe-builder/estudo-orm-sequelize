@@ -1,5 +1,6 @@
 const { PessoasServices } = require('../services')
 const pessoasServices = new PessoasServices()
+const Token  = require('../utils/Token') 
 
 class PessoaController {
     static async pegaPessoasAtivas(req, res) {
@@ -29,6 +30,23 @@ class PessoaController {
         } catch (error) {
             return res.status(404).json(error.message)
         }
+    }
+
+    static async pegaUmaPessoaPorEmail(req, res) {
+        const { email }  = req.body
+        console.log(email)
+        try {
+            const umaPessoa = await pessoasServices.pegaUmRegistro({ email })
+            return res.status(200).json(umaPessoa)
+        } catch (error) {
+            return res.status(404).json(error.message)
+        }
+    }
+
+    static async login(req, res) {
+        const token = Token.criaTokenJWT(req.user);
+        res.set('Authorization', token);
+        res.status(204).send();
     }
 
     static async criaPessoa(req, res) {

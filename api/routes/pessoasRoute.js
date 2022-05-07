@@ -2,12 +2,16 @@ const { Router } = require('express')
 const PessoaController = require('../controllers/PessoaController')
 const MatriculaController = require('../controllers/MatriculaController')
 
+const passport = require('passport')
+
 const router = Router()
 
 router
+    .post('/pessoas/login', passport.authenticate('local', { session: false }), PessoaController.login)
     .get('/pessoas', PessoaController.pegaTodasAsPessoas)
     .get('/pessoas/ativas', PessoaController.pegaPessoasAtivas)
     .get('/pessoas/:id', PessoaController.pegaUmaPessoa)
+    .post('/pessoas/email', PessoaController.pegaUmaPessoaPorEmail)
     .post('/pessoas', PessoaController.criaPessoa)
     .put('/pessoas/:id', PessoaController.atualizaPessoa)
     .delete('/pessoas/:id', PessoaController.apagaPessoa)
