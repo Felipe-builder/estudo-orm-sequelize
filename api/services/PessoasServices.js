@@ -17,6 +17,20 @@ class PessoasServices extends Services {
             .findAll({ where: { ...where }})
     }
 
+    async pegaUmRegistro(where = {}) {
+        return database[this.nomeDoModelo]
+            .scope('todos')
+            .findOne({where: { ...where}})
+    }
+
+    async atualizaRegistro(dadosAtualizados, id, transacao = {}){
+        return database[this.nomeDoModelo]
+            .scope('todos')
+            .update(dadosAtualizados, {
+                where: { id: id}
+            })
+    }
+
     /**
      * Método que cancela a matricula dos alunos, alterando primeiramente o atributo "ativo": true para "ativo": false.
      * Após alteração devida da coluna 'ativo' ocorree a alteração da coluna de "status" para "status": "cancelado"
