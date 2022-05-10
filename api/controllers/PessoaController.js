@@ -36,7 +36,7 @@ class PessoaController {
         const { email }  = req.body
         console.log(email)
         try {
-            const umaPessoa = await pessoasServices.pegaUmRegistro({ email })
+            const umaPessoa = await pessoasServices.pegaUmEmail(email)
             return res.status(200).json(umaPessoa)
         } catch (error) {
             return res.status(404).json(error.message)

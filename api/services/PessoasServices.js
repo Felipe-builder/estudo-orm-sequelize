@@ -23,12 +23,29 @@ class PessoasServices extends Services {
             .findOne({where: { ...where}})
     }
 
+
     async atualizaRegistro(dadosAtualizados, id, transacao = {}){
         return database[this.nomeDoModelo]
             .scope('todos')
             .update(dadosAtualizados, {
                 where: { id: id}
             })
+    }
+
+    async apagaRegistro(id) {
+        return database[this.nomeDoModelo]
+            .scope('todos')
+            .destroy({ where: { id: Number(id) }})
+    }
+
+    async restauraRegistro(id) {
+        return database[this.nomeDoModelo]
+        .scope('todos')
+        .restore({
+            where: {
+                id: id
+            }
+        })
     }
 
     /**

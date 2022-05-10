@@ -30,7 +30,7 @@ passport.use(
         session: false
     }, async (email, senha, done) => {
         try {
-            const pessoa = await pessoaServices.pegaUmRegistro({email}) 
+            const pessoa = await pessoaServices.pegaUmRegistro({email: email}) 
             verificaPessoa(pessoa);
             await verificaSenha(senha, pessoa.senha);
 
