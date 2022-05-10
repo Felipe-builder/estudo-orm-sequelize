@@ -5,7 +5,6 @@ class Token {
         const payload = {
             id: pessoa.id
         }
-        console.log(process.env.CHAVE_JWT)
         const token = jwt.sign(payload, process.env.CHAVE_JWT)
         return token
     }
