@@ -1,8 +1,8 @@
 FROM node:16.14.0
 WORKDIR /app-node
+ARG PORT_BUILD=3000
+ENV PORT=$PORT_BUILD
+EXPOSE $PORT_BUILD
 COPY . .
 RUN npm install
-COPY . . 
-EXPOSE 3000
-
 ENTRYPOINT npm run start
