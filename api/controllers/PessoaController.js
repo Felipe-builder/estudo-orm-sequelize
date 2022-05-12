@@ -1,6 +1,7 @@
 const { PessoasServices } = require('../services')
 const pessoasServices = new PessoasServices()
 const Token  = require('../utils/Token') 
+const blacklist = require('../../redis/manipula-blacklist')
 
 class PessoaController {
     static async pegaPessoasAtivas(req, res) {
@@ -47,6 +48,16 @@ class PessoaController {
         const token = Token.criaTokenJWT(req.user);
         res.set('Authorization', token);
         res.status(204).send();
+    }
+
+    static async logout(req, res) {
+        try {
+            const token = req.token;
+            await blacklist.adiciona(token);
+            res.status(204).send()
+        } catch (erro) {
+            res.status(500).json({erro: erro.message})
+        }
     }
 
     static async criaPessoa(req, res) {

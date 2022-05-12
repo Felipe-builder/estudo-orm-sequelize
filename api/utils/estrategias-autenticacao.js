@@ -47,10 +47,8 @@ passport.use(
         async (token, done) => {
             try {
                 const payload = jwt.verify(token, process.env.CHAVE_JWT);
-                // console.log(payload.id)
-
                 const pessoa = await pessoaServices.pegaUmRegistro({ id: payload.id });
-                done(null, pessoa);
+                done(null, pessoa, { token: token });
             } catch (erro) {
                 done(erro);
             }

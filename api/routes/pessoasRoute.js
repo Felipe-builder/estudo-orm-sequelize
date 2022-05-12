@@ -9,6 +9,7 @@ const router = Router()
 
 router
     .post('/pessoas/login', middlewaresAutenticacao.local, PessoaController.login)
+    .get('/pessoas/logout', middlewaresAutenticacao.bearer, PessoaController.logout)
     .get('/pessoas', PessoaController.pegaTodasAsPessoas)
     .get('/pessoas/ativas', PessoaController.pegaPessoasAtivas)
     .get('/pessoas/:id', middlewaresAutenticacao.bearer, PessoaController.pegaUmaPessoa)
