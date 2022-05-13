@@ -30,6 +30,7 @@ module.exports = {
             {session: false},
             (erro, pessoa, info) => {
                 if (erro && erro.name === 'JsonWebTokenError') {
+                    console.log('erro')
                     return res.status(401).json({erro: erro.message})
                 }
 
@@ -51,5 +52,4 @@ module.exports = {
             }
         )(req, res, next);
     }
-    
 }

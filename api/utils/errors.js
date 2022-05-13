@@ -13,8 +13,16 @@ class InvalidArgumentError extends Error {
       this.idError = 1;
     }
   }
+
+  class ExpirationError extends Error {
+    constructor(mensagem) {
+      super(mensagem);
+      this.name = 'ExpirationError'
+    }
+  }
   
   module.exports = {
     InvalidArgumentError: InvalidArgumentError,
-    InternalServerError: InternalServerError
+    InternalServerError: InternalServerError,
+    ExpirationError: ExpirationError
   };
