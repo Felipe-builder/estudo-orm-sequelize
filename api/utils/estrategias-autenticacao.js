@@ -55,6 +55,7 @@ passport.use(
             try {
                 await verificaTokenNaBlacklist(token)
                 const payload = jwt.verify(token, process.env.CHAVE_JWT);
+                console.log(payload)
                 const pessoa = await pessoaServices.pegaUmRegistro({ id: payload.id });
                 done(null, pessoa, { token: token });
             } catch (erro) {
