@@ -5,7 +5,7 @@ class Token {
         const payload = {
             id: pessoa.id
         }
-        const token = jwt.sign(payload, process.env.CHAVE_JWT, { expiresIn: '15m' })
+        const token = jwt.sign(payload, process.env.CHAVE_JWT)                                 
         return token
     }
 }

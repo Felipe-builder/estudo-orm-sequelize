@@ -1,18 +1,25 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
-
-const PessoasServices = require('../services/PessoasServices')
-const pessoaServices = new PessoasServices();
-
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const PessoasServices = require('../services/PessoasServices')
+const pessoaServices = new PessoasServices();
 const { InvalidArgumentError } = require('./errors');
+const blacklist = require('../../redis/manipula-blacklist')
+
 
 function verificaPessoa(pessoa) {
     if (!pessoa) {
         throw new InvalidArgumentError('Não existe pessoa com esse email');
+    }
+}
+
+async function verificaTokenNaBlacklist(token) {
+    const tokenNaBlacklist = await blacklist.contemToken(token);
+    if(tokenNaBlacklist) {
+        throw new jwt.JsonWebTokenError('Token inválido por logout');
     }
 }
 
@@ -46,7 +53,9 @@ passport.use(
     new BearerStrategy(
         async (token, done) => {
             try {
+                await verificaTokenNaBlacklist(token)
                 const payload = jwt.verify(token, process.env.CHAVE_JWT);
+                console.log(payload)
                 const pessoa = await pessoaServices.pegaUmRegistro({ id: payload.id });
                 done(null, pessoa, { token: token });
             } catch (erro) {
