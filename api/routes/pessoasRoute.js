@@ -3,8 +3,6 @@ const PessoaController = require('../controllers/PessoaController')
 const MatriculaController = require('../controllers/MatriculaController')
 const middlewaresAutenticacao = require('../utils/middlewares-autenticacao')
 
-const passport = require('passport')
-
 const router = Router()
 
 router
@@ -13,7 +11,6 @@ router
     .get('/pessoas', PessoaController.pegaTodasAsPessoas)
     .get('/pessoas/ativas', PessoaController.pegaPessoasAtivas)
     .get('/pessoas/:id', middlewaresAutenticacao.bearer, PessoaController.pegaUmaPessoa)
-    .post('/pessoas/email', PessoaController.pegaUmaPessoaPorEmail)
     .post('/pessoas', PessoaController.criaPessoa)
     .put('/pessoas/:id', middlewaresAutenticacao.bearer, PessoaController.atualizaPessoa)
     .delete('/pessoas/:id', middlewaresAutenticacao.bearer, PessoaController.apagaPessoa)
