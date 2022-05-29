@@ -14,6 +14,7 @@ class Token {
     static criaTokenOpaco(usuario){
         const tokenOpaco = crypto.randomBytes(24).toString('hex');
         const dataExpiracao = moment().add(5, 'd').unix(); 
+        
         return tokenOpaco;
     }
 }
