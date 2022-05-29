@@ -33,21 +33,11 @@ class PessoaController {
         }
     }
 
-    static async pegaUmaPessoaPorEmail(req, res) {
-        const { email }  = req.body
-        console.log(email)
-        try {
-            const umaPessoa = await pessoasServices.pegaUmEmail(email)
-            return res.status(200).json(umaPessoa)
-        } catch (error) {
-            return res.status(404).json(error.message)
-        }
-    }
-
     static async login(req, res) {
-        const token = Token.criaTokenJWT(req.user);
-        res.set('Authorization', token);
-        res.status(204).send();
+        const acessToken = Token.criaTokenJWT(req.user);
+        const refreshToken = Token.criaTokenOpaco(req.user);
+        res.set('Authorization', acessToken);
+        res.status(200).send({ refreshToken });
     }
 
     static async logout(req, res) {
