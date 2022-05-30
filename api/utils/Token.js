@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const moment = require('moment');
 
+const allowlistRefreshToken = require('../../redis/allowlist-refresh-token');
+
 class Token {
     static criaTokenJWT(pessoa) {
         const payload = {
@@ -11,10 +13,10 @@ class Token {
         return token;
     }
 
-    static criaTokenOpaco(usuario){
+    static async criaTokenOpaco(pessoa){
         const tokenOpaco = crypto.randomBytes(24).toString('hex');
         const dataExpiracao = moment().add(5, 'd').unix(); 
-        
+        await allowlistRefreshToken.adiciona(tokenOpaco, pessoa.id, dataExpiracao);
         return tokenOpaco;
     }
 }

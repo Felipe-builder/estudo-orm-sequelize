@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const PessoasServices = require('../services/PessoasServices')
 const pessoaServices = new PessoasServices();
 const { InvalidArgumentError } = require('./errors');
-const blacklist = require('../../redis/manipula-blacklist')
+const blocklist = require('../../redis/blocklist-access-token')
 
 
 function verificaPessoa(pessoa) {
@@ -16,9 +16,9 @@ function verificaPessoa(pessoa) {
     }
 }
 
-async function verificaTokenNaBlacklist(token) {
-    const tokenNaBlacklist = await blacklist.contemToken(token);
-    if(tokenNaBlacklist) {
+async function verificaTokenNaBlocklist(token) {
+    const tokenNaBlocklist = await blocklist.contemToken(token);
+    if(tokenNaBlocklist) {
         throw new jwt.JsonWebTokenError('Token inválido por logout');
     }
 }
@@ -53,7 +53,7 @@ passport.use(
     new BearerStrategy(
         async (token, done) => {
             try {
-                await verificaTokenNaBlacklist(token)
+                await verificaTokenNaBlocklist(token)
                 const payload = jwt.verify(token, process.env.CHAVE_JWT);
                 const pessoa = await pessoaServices.pegaUmRegistro({ id: payload.id });
                 done(null, pessoa, { token: token });
