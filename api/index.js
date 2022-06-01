@@ -2,7 +2,8 @@ require('dotenv').config()
 
 const express = require('express')
 const routes = require('./routes')
-require('../redis/blacklist');
+require('../redis/blocklist-access-token');
+require('../redis/allowlist-refresh-token');
 
 const app = express()
 const port = 3000

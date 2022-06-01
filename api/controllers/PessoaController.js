@@ -1,7 +1,11 @@
-const { PessoasServices } = require('../services')
-const pessoasServices = new PessoasServices()
-const Token  = require('../utils/Token') 
-const blacklist = require('../../redis/manipula-blacklist')
+const { PessoasServices } = require('../services');
+const pessoasServices = new PessoasServices();
+// const Token  = require('../utils/Token');
+const blocklist = require('../../redis/blocklist-access-token');
+const { AccessToken, TokenOpaco } = require('../models/tokens')
+const accessToken = new AccessToken();
+const tokenOpaco = new TokenOpaco();
+
 
 class PessoaController {
     static async pegaPessoasAtivas(req, res) {
@@ -34,16 +38,20 @@ class PessoaController {
     }
 
     static async login(req, res) {
-        const acessToken = Token.criaTokenJWT(req.user);
-        const refreshToken = Token.criaTokenOpaco(req.user);
-        res.set('Authorization', acessToken);
-        res.status(200).send({ refreshToken });
+        try {
+            const acessToken = accessToken.criaTokenJWT(req.user.id);
+            const refreshToken = await tokenOpaco.criaTokenOpaco(req.user.id);
+            res.set('Authorization', acessToken);
+            res.status(200).send({ refreshToken });
+        } catch(erro) {
+            res.status(500).json({erro: erro.message})
+        }
     }
 
     static async logout(req, res) {
         try {
             const token = req.token;
-            await blacklist.adiciona(token);
+            await blocklist.adiciona(token);
             res.status(204).send()
         } catch (erro) {
             res.status(500).json({erro: erro.message})

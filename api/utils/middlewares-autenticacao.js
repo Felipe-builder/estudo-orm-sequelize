@@ -1,4 +1,17 @@
-const passport = require('passport')
+const passport = require('passport');
+
+const { PessoasServices } = require('../services');
+const pessoasServices = new PessoasServices();
+
+const { TokenOpaco } = require('../models/tokens');
+const tokenOpaco = new TokenOpaco();
+
+const allowlistRefreshToken = require('../../redis/allowlist-refresh-token');
+
+async function invalidaRefreshToken(refreshToken){
+    allowlistRefreshToken.deleta(refreshToken);
+}
+
 
 module.exports = {
     local: (req, res, next) => { 
@@ -50,5 +63,21 @@ module.exports = {
                 return next();
             }
         )(req, res, next);
+    },
+
+    async refresh(req, res, next) {
+        try {
+            const { refreshToken } = req.body;
+            const id = await tokenOpaco.verificaTokenOpaco(refreshToken);
+            await  invalidaRefreshToken(refreshToken);
+            req.user = await pessoasServices.pegaUmRegistro({ id });
+            return next();
+        } catch(erro) {
+            if(erro.name === 'InvalidArgumentError') {
+                return res.status(401).json({erro: erro.message})
+            }
+
+            return res.status(500).json({erro: erro.message})
+        }
     }
 }
