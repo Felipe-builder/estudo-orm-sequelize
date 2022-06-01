@@ -10,6 +10,7 @@ class PessoasServices extends Services {
     async pegaRegistrosAtivos(where = {}) {
         return database[this.nomeDoModelo].findAll({ where: { ...where }})
     }
+    
 
     async pegaTodosOsRegistros(where = {}){
         return database[this.nomeDoModelo]

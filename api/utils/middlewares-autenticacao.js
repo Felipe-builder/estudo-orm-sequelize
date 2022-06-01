@@ -3,21 +3,10 @@ const passport = require('passport');
 const { PessoasServices } = require('../services');
 const pessoasServices = new PessoasServices();
 
+const { TokenOpaco } = require('../models/tokens');
+const tokenOpaco = new TokenOpaco();
+
 const allowlistRefreshToken = require('../../redis/allowlist-refresh-token');
-
-const { InvalidArgumentError } = require('./errors');
-
-
-async function verificaRefreshToken(refreshToken) {
-    if (!refreshToken) {
-        throw new InvalidArgumentError('Refresh não enviado!');
-    }
-    const id = await allowlistRefreshToken.buscaValor(refreshToken);
-    if (!id) {
-        throw new InvalidArgumentError('Refresh token inválido!');
-    }
-    return id;
-}
 
 async function invalidaRefreshToken(refreshToken){
     allowlistRefreshToken.deleta(refreshToken);
@@ -79,7 +68,7 @@ module.exports = {
     async refresh(req, res, next) {
         try {
             const { refreshToken } = req.body;
-            const id = await verificaRefreshToken(refreshToken);
+            const id = await tokenOpaco.verificaTokenOpaco(refreshToken);
             await  invalidaRefreshToken(refreshToken);
             req.user = await pessoasServices.pegaUmRegistro({ id });
             return next();

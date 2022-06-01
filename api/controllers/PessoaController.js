@@ -1,7 +1,11 @@
-const { PessoasServices } = require('../services')
-const pessoasServices = new PessoasServices()
-const Token  = require('../utils/Token') 
-const blocklist = require('../../redis/blocklist-access-token')
+const { PessoasServices } = require('../services');
+const pessoasServices = new PessoasServices();
+// const Token  = require('../utils/Token');
+const blocklist = require('../../redis/blocklist-access-token');
+const { AccessToken, TokenOpaco } = require('../models/tokens')
+const accessToken = new AccessToken();
+const tokenOpaco = new TokenOpaco();
+
 
 class PessoaController {
     static async pegaPessoasAtivas(req, res) {
@@ -35,8 +39,8 @@ class PessoaController {
 
     static async login(req, res) {
         try {
-            const acessToken = Token.criaTokenJWT(req.user);
-            const refreshToken = await Token.criaTokenOpaco(req.user);
+            const acessToken = accessToken.criaTokenJWT(req.user.id);
+            const refreshToken = await tokenOpaco.criaTokenOpaco(req.user.id);
             res.set('Authorization', acessToken);
             res.status(200).send({ refreshToken });
         } catch(erro) {
