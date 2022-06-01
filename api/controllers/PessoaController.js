@@ -1,8 +1,7 @@
 const { PessoasServices } = require('../services');
-const pessoasServices = new PessoasServices();
-// const Token  = require('../utils/Token');
-const blocklist = require('../../redis/blocklist-access-token');
 const { AccessToken, TokenOpaco } = require('../models/tokens')
+
+const pessoasServices = new PessoasServices();
 const accessToken = new AccessToken();
 const tokenOpaco = new TokenOpaco();
 
@@ -51,7 +50,7 @@ class PessoaController {
     static async logout(req, res) {
         try {
             const token = req.token;
-            await blocklist.adiciona(token);
+            await accessToken.invalidaTokenJWT(token);
             res.status(204).send()
         } catch (erro) {
             res.status(500).json({erro: erro.message})

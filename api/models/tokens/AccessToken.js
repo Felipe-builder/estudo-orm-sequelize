@@ -1,15 +1,15 @@
 const jwt = require('jsonwebtoken');
 
-
 const Token = require("./Token");
+
+const blocklist = require('../../../redis/blocklist-access-token');
 const blocklistAccessToken = require('../../../redis/blocklist-access-token')
-const { InvalidArgumentError } = require('../../utils/errors');
 
 
 class AccessToken extends Token {
 
     constructor() {
-        super('acess token', [15, 'm'])
+        super('acess token', [15, 's'])
     }
 
     criaTokenJWT(id) {
@@ -31,6 +31,9 @@ class AccessToken extends Token {
         }
     }
 
+    invalidaTokenJWT(token) {
+        return blocklist.adiciona(token);
+    }
 }
 
 module.exports = AccessToken;

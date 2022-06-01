@@ -6,12 +6,6 @@ const pessoasServices = new PessoasServices();
 const { TokenOpaco } = require('../models/tokens');
 const tokenOpaco = new TokenOpaco();
 
-const allowlistRefreshToken = require('../../redis/allowlist-refresh-token');
-
-async function invalidaRefreshToken(refreshToken){
-    allowlistRefreshToken.deleta(refreshToken);
-}
-
 
 module.exports = {
     local: (req, res, next) => { 
@@ -69,7 +63,7 @@ module.exports = {
         try {
             const { refreshToken } = req.body;
             const id = await tokenOpaco.verificaTokenOpaco(refreshToken);
-            await  invalidaRefreshToken(refreshToken);
+            await tokenOpaco.invalidaTokenOpaco(refreshToken);
             req.user = await pessoasServices.pegaUmRegistro({ id });
             return next();
         } catch(erro) {
