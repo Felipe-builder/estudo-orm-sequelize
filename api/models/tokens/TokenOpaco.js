@@ -27,7 +27,6 @@ class TokenOpaco extends Token {
         this.verificaTokenValido(id);
         return id;
     }
-    
 
     verificaTokenValido(id) {
         if (!id) {
@@ -39,6 +38,10 @@ class TokenOpaco extends Token {
         if (!token) {
             throw new InvalidArgumentError(`${this.nome} não enviado!`);
         }
+    }
+
+    async invalidaTokenOpaco(token){
+        await allowlistRefreshToken.deleta(token);
     }
 }
 
