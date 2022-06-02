@@ -9,7 +9,7 @@ const blocklistAccessToken = require('../../../redis/blocklist-access-token')
 class AccessToken extends Token {
 
     constructor() {
-        super('acess token', [15, 's'])
+        super('acess token', [15, 'm'])
     }
 
     criaTokenJWT(id) {

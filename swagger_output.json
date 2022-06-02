@@ -20,6 +20,9 @@
   "paths": {
     "/niveis": {
       "get": {
+        "tags": [
+          "Niveis"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -32,6 +35,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Niveis"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -46,6 +52,9 @@
     },
     "/niveis/{id}": {
       "get": {
+        "tags": [
+          "Niveis"
+        ],
         "description": "",
         "parameters": [
           {
@@ -67,6 +76,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Niveis"
+        ],
         "description": "",
         "parameters": [
           {
@@ -88,6 +100,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Niveis"
+        ],
         "description": "",
         "parameters": [
           {
@@ -111,6 +126,9 @@
     },
     "/niveis/{id}/restaura": {
       "post": {
+        "tags": [
+          "Niveis"
+        ],
         "description": "",
         "parameters": [
           {
@@ -132,20 +150,6 @@
         }
       }
     },
-    "/pessoas/ativas": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
     "/pessoas/login": {
       "post": {
         "tags": [
@@ -156,7 +160,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refresh"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -187,7 +198,14 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refresh"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -213,8 +231,8 @@
         "tags": [
           "Pessoas"
         ],
-        "summary": "Log into the system with credentials",
-        "description": "Log into the system with credentials",
+        "summary": "Log out the system with credentials",
+        "description": "Log out the system with credentials",
         "parameters": [],
         "responses": {
           "204": {
@@ -229,7 +247,7 @@
         },
         "security": [
           {
-            "apiKeyAuth": []
+            "bearerAuth": []
           }
         ],
         "requestBody": {
@@ -253,8 +271,8 @@
         "tags": [
           "Pessoas"
         ],
-        "summary": "Some summary...",
-        "description": "catch all people",
+        "summary": "Return All people",
+        "description": "Catch all people",
         "parameters": [],
         "responses": {
           "200": {
@@ -262,7 +280,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PessoaCriada"
+                  "$ref": "#/components/schemas/TodasPessoasCriadas"
                 }
               }
             }
@@ -306,12 +324,37 @@
         }
       }
     },
+    "/pessoas/ativas": {
+      "get": {
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Return all active people",
+        "description": "catch all active people",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TodasPessoasCriadas"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/pessoas/{id}": {
       "get": {
         "tags": [
           "Pessoas"
         ],
-        "summary": "Some summary...",
+        "summary": "Return one person",
         "description": "catch one person",
         "parameters": [
           {
@@ -325,7 +368,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PessoaCriada"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -336,10 +386,19 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Updated datas of Person",
+        "description": "Updated datas of Person",
         "parameters": [
           {
             "name": "id",
@@ -360,10 +419,19 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Delete a Person",
+        "description": "Delete a Person",
         "parameters": [
           {
             "name": "id",
@@ -376,7 +444,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "message": "id ${id} deletado"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -384,12 +459,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/pessoas/{id}/restaura": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Restoure datas of Person",
+        "description": "Restoure datas of Person",
         "parameters": [
           {
             "name": "id",
@@ -407,11 +491,19 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/pessoas/{estudanteId}/matriculas/{matriculaId}": {
       "get": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -441,6 +533,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -473,6 +568,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -507,6 +605,9 @@
     },
     "/pessoas/{estudanteId}/matriculas": {
       "post": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -531,6 +632,9 @@
         }
       },
       "get": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -557,6 +661,9 @@
     },
     "/pessoas/{estudanteId}/matriculas/{matriculaId}/restaura": {
       "post": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -591,6 +698,9 @@
     },
     "/pessoas/matriculas/{turmaId}/confirmadas": {
       "get": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -614,6 +724,9 @@
     },
     "/pessoas/matriculas/lotadas": {
       "get": {
+        "tags": [
+          "Matriculas"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -628,7 +741,11 @@
     },
     "/pessoas/{estudanteId}/cancela": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Cancel enrollment of a Person",
+        "description": "cancel enrollment of a Person",
         "parameters": [
           {
             "name": "estudanteId",
@@ -649,11 +766,19 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/turmas": {
       "get": {
+        "tags": [
+          "Turmas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -683,6 +808,9 @@
     },
     "/turmas/{id}": {
       "get": {
+        "tags": [
+          "Turmas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -704,6 +832,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Turmas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -725,6 +856,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Turmas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -748,6 +882,9 @@
     },
     "/turmas/": {
       "post": {
+        "tags": [
+          "Turmas"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -762,6 +899,9 @@
     },
     "/turmas/{id}/restaura": {
       "post": {
+        "tags": [
+          "Turmas"
+        ],
         "description": "",
         "parameters": [
           {
@@ -868,13 +1008,52 @@
             "example": "2022-06-01T14:18:37.482Z"
           }
         }
+      },
+      "TodasPessoasCriadas": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/PessoaCriada"
+        }
+      },
+      "Refresh": {
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "example": "6c7adb01df366884ece88caf384245b1d84417be378c05e1"
+          }
+        }
+      },
+      "JwtExpired": {
+        "type": "object",
+        "properties": {
+          "erro": {
+            "type": "string",
+            "example": "jwt expired"
+          },
+          "expiradoEm": {
+            "type": "string",
+            "example": "2022-06-02T17:45:45.000Z"
+          }
+        }
+      },
+      "RefreshTokenNotSend": {
+        "type": "object",
+        "properties": {
+          "erro": {
+            "type": "string",
+            "example": "refresh token não enviado!"
+          }
+        }
       }
     },
     "securitySchemes": {
-      "bearer": {
-        "description": "|\n   For accessing the API a valid JWT token must be passed in all the queries in\n   the 'Authorization' header.\n\n\n   A valid JWT token is generated by the API and retourned as answer of a call\n   to the route /login giving a valid user & password.\n\n\n   The following syntax must be used in the 'Authorization' header :\n\n       Bearer: xxxxxx.yyyyyyy.zzzzzz",
-        "type": "apiKey",
+      "bearerAuth": {
+        "description": "\n   For accessing the API a valid JWT token must be passed in all the queries in\n   the 'Authorization' header.\n\n   A valid JWT token is generated by the API and retourned as answer of a call\n   to the route /login giving a valid user & password.\n\n   The following syntax must be used in the 'Authorization' header :\n\n       Bearer: xxxxxx.yyyyyyy.zzzzzz",
+        "type": "http",
         "name": "Authorization",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
         "in": "header"
       }
     }

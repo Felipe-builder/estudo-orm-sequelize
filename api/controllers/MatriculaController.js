@@ -5,6 +5,9 @@ const pessoasServices = new PessoasServices()
 
 class MatriculaController {
     static async pegaUmaMatricula(req, res) {
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const { estudanteId, matriculaId } = req.params
         try {
             const umaMatricula = await matriculasServices
@@ -15,6 +18,9 @@ class MatriculaController {
         }
     }
     static async criaMatricula(req, res){
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const { estudanteId } = req.params
         const novaMatricula = { ...req.body, estudante_id: Number(estudanteId)}
         try {
@@ -26,6 +32,9 @@ class MatriculaController {
     }
 
     static async atualizaMatricula(req, res) {
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const { estudanteId, matriculaId } = req.params
         const novasInfos = req.body
         try {
@@ -43,6 +52,9 @@ class MatriculaController {
     }
 
     static async apagaMatricula(req, res) {
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const { matriculaId } = req.params
         try {
             await matriculasServices.apagaRegistro(Number(matriculaId))
@@ -53,6 +65,9 @@ class MatriculaController {
     }
 
     static async restauraMatricula(req, res) {
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const { matriculaId } = req.params
         try {
             await matriculasServices.restauraRegistro(Number(matriculaId))
@@ -63,6 +78,9 @@ class MatriculaController {
     }
 
     static async pegaMatriculas(req, res) {
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const { estudanteId } = req.params
         try {
             const pessoa = await pessoasServices.pegaUmRegistro({ id: Number(estudanteId)})
@@ -74,6 +92,9 @@ class MatriculaController {
     }
 
     static async pegaMatriculasPorTurma(req, res) {
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const { turmaId } = req.params
         try {
             const todasAsMatriculas = await matriculasServices
@@ -87,6 +108,9 @@ class MatriculaController {
     }
 
     static async pegaTurmasLotadas(req, res) {
+        /**
+            #swagger.tags = ['Matriculas']
+         */
         const lotacaoTurma = 3
         try {
             const turmasLotadas = await matriculasServices
