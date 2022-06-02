@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "API - School of English",
     "version": "1.0.0",
@@ -11,16 +11,11 @@
       "email": "support@example.com"
     }
   },
-  "host": "localhost:3000",
   "servers": [
     {
       "url": "http://localhost:3000",
       "description": "My API Documentation"
     }
-  ],
-  "basePath": "/",
-  "schemes": [
-    "http"
   ],
   "paths": {
     "/niveis": {
@@ -57,7 +52,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -76,7 +73,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -95,7 +94,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -116,9 +117,25 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/pessoas/ativas": {
+      "get": {
+        "description": "",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -131,7 +148,11 @@
     },
     "/pessoas/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Log into the system with credentials",
+        "description": "Log into the system with credentials",
         "parameters": [],
         "responses": {
           "200": {
@@ -143,26 +164,27 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
         }
       }
     },
     "/pessoas/atualiza_token": {
       "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "refreshToken": {
-                  "example": "any"
-                }
-              }
-            }
-          }
+        "tags": [
+          "Pessoas"
         ],
+        "summary": "Log into the system with credentials",
+        "description": "Log into the system with credentials",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -173,26 +195,27 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
         }
       }
     },
     "/pessoas/logout": {
       "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "refreshToken": {
-                  "example": "any"
-                }
-              }
-            }
-          }
+        "tags": [
+          "Pessoas"
         ],
+        "summary": "Log into the system with credentials",
+        "description": "Log into the system with credentials",
+        "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"
@@ -203,16 +226,46 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "refreshToken": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
     "/pessoas": {
       "get": {
-        "description": "",
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Some summary...",
+        "description": "catch all people",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "User successfully obtained.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PessoaCriada"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -220,72 +273,54 @@
         }
       },
       "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/pessoas/ativas": {
-      "get": {
         "tags": [
           "Pessoas"
         ],
-        "summary": "Some summary...",
-        "description": "Some description...",
-        "parameters": [
-          {
-            "name": "obj",
-            "in": "body",
-            "description": "Some description...",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "example": "Jhon Doe"
-                },
-                "age": {
-                  "type": "number",
-                  "example": 29
-                },
-                "about": {
-                  "type": "string",
-                  "example": ""
-                }
-              },
-              "required": [
-                "name",
-                "age"
-              ]
-            }
-          }
-        ],
+        "summary": "Create a person",
+        "description": "Create a person",
+        "parameters": [],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Person created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PessoaCriada"
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pessoa"
+              }
+            }
           }
         }
       }
     },
     "/pessoas/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Some summary...",
+        "description": "catch one person",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -310,7 +345,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -332,7 +369,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -356,7 +395,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -377,13 +418,17 @@
             "name": "estudanteId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "matriculaId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -402,13 +447,17 @@
             "name": "estudanteId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "matriculaId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -430,13 +479,17 @@
             "name": "estudanteId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "matriculaId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -460,7 +513,9 @@
             "name": "estudanteId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -482,7 +537,9 @@
             "name": "estudanteId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -506,13 +563,17 @@
             "name": "estudanteId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "matriculaId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -536,7 +597,9 @@
             "name": "turmaId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -571,7 +634,9 @@
             "name": "estudanteId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -594,12 +659,16 @@
           {
             "name": "data_inicial",
             "in": "query",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "name": "data_final",
             "in": "query",
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -620,7 +689,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -639,7 +710,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -658,7 +731,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -693,7 +768,9 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -704,6 +781,101 @@
             "description": "Internal Server Error"
           }
         }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Pessoa": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "example": "Oliver Queen"
+          },
+          "nomeUser": {
+            "type": "string",
+            "example": "OliverArrow212"
+          },
+          "ativo": {
+            "type": "boolean",
+            "example": true
+          },
+          "senha": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "email": {
+            "type": "string",
+            "example": "arrow-oliver@hotmail.com"
+          },
+          "role": {
+            "type": "string",
+            "example": "estudante"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "arrow-oliver@hotmail.com"
+          },
+          "senha": {
+            "type": "string",
+            "example": "123456789"
+          }
+        }
+      },
+      "PessoaCriada": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "12"
+          },
+          "nome": {
+            "type": "string",
+            "example": "Oliver Queen"
+          },
+          "nomeUser": {
+            "type": "string",
+            "example": "OliverArrow212"
+          },
+          "ativo": {
+            "type": "boolean",
+            "example": true
+          },
+          "senha": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "email": {
+            "type": "string",
+            "example": "arrow-oliver@hotmail.com"
+          },
+          "role": {
+            "type": "string",
+            "example": "estudante"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2022-06-01T14:18:37.482Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2022-06-01T14:18:37.482Z"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "description": "|\n   For accessing the API a valid JWT token must be passed in all the queries in\n   the 'Authorization' header.\n\n\n   A valid JWT token is generated by the API and retourned as answer of a call\n   to the route /login giving a valid user & password.\n\n\n   The following syntax must be used in the 'Authorization' header :\n\n       Bearer: xxxxxx.yyyyyyy.zzzzzz",
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
       }
     }
   },

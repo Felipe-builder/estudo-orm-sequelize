@@ -14,16 +14,18 @@ class PessoaController {
          /* 
             #swagger.tags = ['Pessoas']
             #swagger.summary = 'Some summary...'
-            #swagger.description = 'Some description...'
-            #swagger.parameters['obj'] = {
-                in: 'body',
-                description: 'Some description...',
-                schema: {
-                    $name: 'Jhon Doe',
-                    $age: 29,
-                    about: ''
+            #swagger.description = 'catch all active people'
+            #swagger.responses[200] = {
+                description: 'User successfully obtained.',
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: '#/definitions/PessoaCriada'
+                        }
+                    }           
+                }
             }
-        } */
+         */
         try {
             const todasAsPessoas = await pessoasServices.pegaRegistrosAtivos();
             return res.status(200).json(todasAsPessoas);
@@ -33,6 +35,21 @@ class PessoaController {
     }
 
     static async pegaTodasAsPessoas(req, res) {
+        /* 
+            #swagger.tags = ['Pessoas']
+            #swagger.summary = 'Some summary...'
+            #swagger.description = 'catch all people'
+            #swagger.responses[200] = {
+                description: 'User successfully obtained.',
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: '#/definitions/PessoaCriada'
+                        }
+                    }           
+                }
+            }
+         */
         try {
             const todasAsPessoas = await pessoasServices.pegaTodosOsRegistros();
             return res.status(200).json(todasAsPessoas);
@@ -42,6 +59,11 @@ class PessoaController {
     }
 
     static async pegaUmaPessoa(req, res) {
+        /* 
+            #swagger.tags = ['Pessoas']
+            #swagger.summary = 'Some summary...'
+            #swagger.description = 'catch one person'
+         */
         const { id } = req.params;
         try{
             const umaPessoa = await pessoasServices.pegaUmRegistro({ id });
@@ -52,6 +74,21 @@ class PessoaController {
     }
 
     static async login(req, res) {
+        /**
+            #swagger.tags = ['Pessoas']
+            #swagger.summary = 'Log into the system with credentials'
+            #swagger.description = 'Log into the system with credentials'
+            #swagger.requestBody = {
+                required: true,
+                "@content": {
+                    "application/json": {
+                        schema: {
+                            $ref: "#/definitions/Login"
+                        }  
+                    }
+                }
+            } 
+         */
         try {
             const acessToken = accessToken.criaTokenJWT(req.user.id);
             const refreshToken = await tokenOpaco.criaTokenOpaco(req.user.id);
@@ -63,6 +100,14 @@ class PessoaController {
     }
 
     static async logout(req, res) {
+        /**
+            #swagger.tags = ['Pessoas']
+            #swagger.summary = 'Log into the system with credentials'
+            #swagger.description = 'Log into the system with credentials'
+            #swagger.security = [{
+                "apiKeyAuth": []
+            }]
+         */
         try {
             const token = req.token;
             await accessToken.invalidaTokenJWT(token);
@@ -73,6 +118,31 @@ class PessoaController {
     }
 
     static async criaPessoa(req, res) {
+        /**
+            #swagger.tags = ['Pessoas']
+            #swagger.summary = 'Create a person'
+            #swagger.description = 'Create a person'
+            #swagger.requestBody = {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: "#/definitions/Pessoa"
+                        }  
+                    }
+                }
+            } 
+            #swagger.responses[201] = {
+                description: "Person created",
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: '#/definitions/PessoaCriada'
+                        }
+                    }           
+                }
+            }  
+         */
         const novaPessoa = req.body;
         try {
             const novaPessoaCriada = await pessoasServices.criaRegistro(novaPessoa);
