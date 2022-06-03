@@ -66,6 +66,13 @@ class PessoasServices extends Services {
             )
         })
     }
+
+    async modificaEmailVerificado(id) {
+        const dadosAtualizados = {
+            emailVerificado: true
+        };
+        return this.atualizaRegistro(dadosAtualizados, id)
+    }
 }
 
 module.exports = PessoasServices
