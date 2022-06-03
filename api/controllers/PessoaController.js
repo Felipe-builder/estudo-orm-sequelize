@@ -115,9 +115,9 @@ class PessoaController {
             const acessToken = accessToken.criaTokenJWT(req.user.id);
             const refreshToken = await tokenOpaco.criaTokenOpaco(req.user.id);
             res.set('Authorization', acessToken);
-            res.status(200).send({ refreshToken });
+            return res.status(200).json({ refreshToken });
         } catch(erro) {
-            res.status(500).json({erro: erro.message})
+            return res.status(500).json({erro: erro.message});
         }
     }
 
@@ -139,11 +139,27 @@ class PessoaController {
         }
     }
 
+    static async verificaEmail(req, res) {
+        const { id } = req.params;
+        try {
+            const pessoa = req.user
+            await pessoasServices.modificaEmailVerificado(Number(id));
+            return res.status(200).json();
+        } catch(erro) {
+            return res.status(500).json({erro: erro.message});
+        }
+    }
+
     static async criaPessoa(req, res) {
         /**
             #swagger.tags = ['Pessoas']
             #swagger.summary = 'Create a person'
             #swagger.description = 'Create a person'
+            #swagger.parameters['obj'] = { 
+                in: 'body',
+                description: 'Informações do usuário',
+                schema: { $ref: "#/definitions/Pessoa" }
+            }
             #swagger.requestBody = {
                 required: true,
                 content: {
@@ -247,9 +263,6 @@ class PessoaController {
             #swagger.tags = ['Pessoas']
             #swagger.summary = 'Cancel enrollment of a Person'
             #swagger.description = 'cancel enrollment of a Person'
-            #swagger.security = [{
-                "bearerAuth": []
-            }]
          */
         const { estudanteId } = req.params;
         try {

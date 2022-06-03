@@ -93,7 +93,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    role: DataTypes.STRING
+    role: DataTypes.STRING,
+    emailVerificado: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Pessoas',

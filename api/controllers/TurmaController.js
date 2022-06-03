@@ -37,6 +37,9 @@ class TurmaController {
     static async criaUmaTurma(req, res) {
         /**
             #swagger.tags = ['Turmas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const novaTurma = req.body
         try {
@@ -49,6 +52,9 @@ class TurmaController {
     static async atualizaTurma(req, res) {
         /**
             #swagger.tags = ['Turmas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { id } = req.params
         const novasInfos = req.body
@@ -63,6 +69,9 @@ class TurmaController {
     static async apagaTurma(req, res) {
         /**
             #swagger.tags = ['Turmas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { id } = req.params
         try {
@@ -75,6 +84,9 @@ class TurmaController {
     static async restauraTurma(req, res) {
         /**
             #swagger.tags = ['Turmas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { id } = req.params 
         try {

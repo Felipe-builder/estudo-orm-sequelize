@@ -72,5 +72,12 @@ module.exports = {
 
             return res.status(500).json({erro: erro.message})
         }
+    },
+
+    async verificacaoEmail(req, res, next) {
+        const { id } = req.params;
+        const pessoa = await pessoasServices.pegaUmRegistro({id});
+        req.user = pessoa;
+        next();
     }
 }

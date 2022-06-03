@@ -20,6 +20,9 @@ class MatriculaController {
     static async criaMatricula(req, res){
         /**
             #swagger.tags = ['Matriculas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]            
          */
         const { estudanteId } = req.params
         const novaMatricula = { ...req.body, estudante_id: Number(estudanteId)}
@@ -34,6 +37,9 @@ class MatriculaController {
     static async atualizaMatricula(req, res) {
         /**
             #swagger.tags = ['Matriculas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { estudanteId, matriculaId } = req.params
         const novasInfos = req.body
@@ -54,6 +60,9 @@ class MatriculaController {
     static async apagaMatricula(req, res) {
         /**
             #swagger.tags = ['Matriculas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { matriculaId } = req.params
         try {
@@ -67,6 +76,9 @@ class MatriculaController {
     static async restauraMatricula(req, res) {
         /**
             #swagger.tags = ['Matriculas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { matriculaId } = req.params
         try {
@@ -80,6 +92,9 @@ class MatriculaController {
     static async pegaMatriculas(req, res) {
         /**
             #swagger.tags = ['Matriculas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { estudanteId } = req.params
         try {
@@ -94,6 +109,9 @@ class MatriculaController {
     static async pegaMatriculasPorTurma(req, res) {
         /**
             #swagger.tags = ['Matriculas']
+            #swagger.security = [{
+                "bearerAuth": []
+            }]
          */
         const { turmaId } = req.params
         try {
