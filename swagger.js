@@ -73,8 +73,8 @@ const doc = {
                 $ref: '#/definitions/PessoaCriada'
             }
         ],
-        Refresh: {
-            refreshToken: "6c7adb01df366884ece88caf384245b1d84417be378c05e1"
+        Refresh: {          
+            refreshToken: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         },
         JwtExpired: {
             erro: "jwt expired",
