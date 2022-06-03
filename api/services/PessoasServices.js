@@ -1,10 +1,11 @@
-const Services = require('./Services')
-const database = require('../models')
+const Services = require('./Services');
+const database = require('../models');
+
 
 class PessoasServices extends Services {
     constructor() {
-        super('Pessoas')
-        this.matriculas = new Services('Matriculas')
+        super('Pessoas');
+        this.matriculas = new Services('Matriculas');
     }
 
     async pegaRegistrosAtivos(where = {}) {

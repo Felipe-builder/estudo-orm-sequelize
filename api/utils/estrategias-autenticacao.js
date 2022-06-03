@@ -8,7 +8,7 @@ const { AccessToken } = require('../models/tokens')
 const { InvalidArgumentError } = require('./errors');
 
 const pessoaServices = new PessoasServices();
-const accessToken = new AccessToken()
+const accessToken = new AccessToken('acess token', [15, 'm']);
 
 function verificaPessoa(pessoa) {
     if (!pessoa) {

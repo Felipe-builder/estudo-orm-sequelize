@@ -9,7 +9,7 @@ router
     .post('/pessoas/login', middlewaresAutenticacao.local, PessoaController.login)
     .post('/pessoas/atualiza_token', middlewaresAutenticacao.refresh, PessoaController.login)
     .post('/pessoas/logout', [middlewaresAutenticacao.refresh, middlewaresAutenticacao.bearer], PessoaController.logout)
-    .get('/pessoas/verifica_email/:id', middlewaresAutenticacao.verificacaoEmail, PessoaController.verificaEmail)
+    .get('/pessoas/verifica_email/:token', middlewaresAutenticacao.verificacaoEmail, PessoaController.verificaEmail)
     .get('/pessoas', PessoaController.pegaTodasAsPessoas)
     .get('/pessoas/ativas', PessoaController.pegaPessoasAtivas)
     .get('/pessoas/:id', middlewaresAutenticacao.bearer, PessoaController.pegaUmaPessoa)

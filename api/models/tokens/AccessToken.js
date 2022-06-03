@@ -8,10 +8,6 @@ const blocklistAccessToken = require('../../../redis/blocklist-access-token')
 
 class AccessToken extends Token {
 
-    constructor() {
-        super('acess token', [15, 'm'])
-    }
-
     criaTokenJWT(id) {
         const payload = { id };
         const token = jwt.sign(payload, process.env.CHAVE_JWT, {expiresIn: this.expiracao.join('')});                         

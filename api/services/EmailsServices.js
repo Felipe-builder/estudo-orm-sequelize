@@ -1,7 +1,7 @@
 class EmailsServices {
-    static geraEndereco(rota, id) {
+    static geraEndereco(rota, token) {
         const baseURL = process.env.BASE_URL+process.env.PORT;
-        return `${baseURL}${rota}${id}`
+        return `${baseURL}${rota}${token}`
     }
 }
 

@@ -3,7 +3,8 @@ const { AccessToken, TokenOpaco } = require('../models/tokens')
 const { EmailVerificacao } = require('../models/email/emails');
 
 const pessoasServices = new PessoasServices();
-const accessToken = new AccessToken();
+const accessToken = new AccessToken('acess token', [15, 'm']);
+const emailToken = new AccessToken('token de verificação de e-mail', [1, 'h']);
 const tokenOpaco = new TokenOpaco();
 
 
@@ -140,10 +141,9 @@ class PessoaController {
     }
 
     static async verificaEmail(req, res) {
-        const { id } = req.params;
         try {
-            const pessoa = req.user
-            await pessoasServices.modificaEmailVerificado(Number(id));
+            const pessoa = req.user;
+            await pessoasServices.modificaEmailVerificado(pessoa.id);
             return res.status(200).json();
         } catch(erro) {
             return res.status(500).json({erro: erro.message});
@@ -184,7 +184,8 @@ class PessoaController {
         const novaPessoa = req.body;
         try {
             const novaPessoaCriada = await pessoasServices.criaRegistro(novaPessoa);
-            const endereco = EmailsServices.geraEndereco('/pessoas/verfica_email/', novaPessoaCriada.id);
+            const token = emailToken.criaTokenJWT(novaPessoaCriada.id);
+            const endereco = EmailsServices.geraEndereco('/pessoas/verifica_email/', token);
             const emailVerificacao = new EmailVerificacao(novaPessoaCriada, endereco);
             emailVerificacao.enviaEmail().catch(console.log);
             return res.status(201).json(novaPessoaCriada);

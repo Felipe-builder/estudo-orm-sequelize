@@ -3,8 +3,9 @@ const passport = require('passport');
 const { PessoasServices } = require('../services');
 const pessoasServices = new PessoasServices();
 
-const { TokenOpaco } = require('../models/tokens');
+const { TokenOpaco, AccessToken } = require('../models/tokens');
 const tokenOpaco = new TokenOpaco();
+const emailToken = new AccessToken('token de verificação de e-mail', [1, 'h']);
 
 
 module.exports = {
@@ -75,9 +76,25 @@ module.exports = {
     },
 
     async verificacaoEmail(req, res, next) {
-        const { id } = req.params;
-        const pessoa = await pessoasServices.pegaUmRegistro({id});
-        req.user = pessoa;
-        next();
+        try {
+            const { token } = req.params;
+            const id = await emailToken.verificaTokenJWT(token);
+            const pessoa = await pessoasServices.pegaUmRegistro({id});
+            req.user = pessoa;
+            next();
+        } catch (error) {
+            if (error.name === 'JsonWebTokenError') {
+                return res.status(401).json({error: error.message});
+            }
+
+            if (error.name === 'TokenExpiredError') {
+                return res.status(401).json({
+                    error: error.message, expiradoEm: error.expiredAt
+                })
+            }
+
+            return res.status(500).json({erro: erro.message})
+        }
+
     }
 }
