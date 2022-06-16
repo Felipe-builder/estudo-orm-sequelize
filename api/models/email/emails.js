@@ -14,7 +14,7 @@ const configuracaoEmailTeste = (contaTeste) => ({
     auth: contaTeste,
 })
 
-function criaConfiguracaoEmail(){
+async function criaConfiguracaoEmail(){
     if (process.env.NODE_ENV === 'production') {
         return configuracaoEmailProducao;
     } else {
